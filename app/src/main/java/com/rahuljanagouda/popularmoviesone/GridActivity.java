@@ -1,14 +1,15 @@
 package com.rahuljanagouda.popularmoviesone;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.GridView;
+import android.widget.TextView;
+
+import com.rahuljanagouda.popularmoviesone.adapters.ImageAdapter;
+import com.rahuljanagouda.popularmoviesone.utils.Okhttp;
 
 public class GridActivity extends AppCompatActivity {
 
@@ -19,15 +20,16 @@ public class GridActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), DetailsActivity.class));
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        try {
+            ((TextView) findViewById(R.id.dummy)).setText(new Okhttp().run().getResults().get(0).getOriginalTitle());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        ((TextView)findViewById(R.id.dummy)).setText(Network.URL_TMDB_DISCOVER_MOVIES_POPULAR_API);
+        GridView moviesGrid = (GridView) findViewById(R.id.moview_grid_layout);
+
+        moviesGrid.setAdapter(new ImageAdapter(this));
+
     }
 
     @Override
