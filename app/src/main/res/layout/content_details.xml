@@ -5,13 +5,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.rahuljanagouda.popularmoviesone.DetailsActivity"
+    tools:context=".ui.DetailsActivity"
     tools:showIn="@layout/activity_details">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="75dp"
+        android:paddingTop="32dp">
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:text="@string/overview"
+        android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/movieOverview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
-        android:text="@string/large_text" />
+            android:text="@string/sample_overview"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:text="@string/release_date"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/movieRleaseDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="@string/sample_release"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:text="@string/rating"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/movieRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="@string/_7_10"
+            android:textSize="20sp" />
+
+
+    </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

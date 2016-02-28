@@ -1,350 +1,367 @@
 package com.rahuljanagouda.popularmoviesone.pojo;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 /**
  * Created by rahuljanagouda on 14/02/16.
  */
 
-public class Result {
+public class Result implements Parcelable {
 
+    public static final Parcelable.Creator<Result> CREATOR = new Parcelable.Creator<Result>() {
+        public Result createFromParcel(Parcel source) {
+            return new Result(source);
+        }
+
+        public Result[] newArray(int size) {
+            return new Result[size];
+        }
+    };
+    @SerializedName("poster_path")
+    @Expose
     private String posterPath;
+    @SerializedName("adult")
+    @Expose
     private Boolean adult;
+    @SerializedName("overview")
+    @Expose
     private String overview;
+    @SerializedName("release_date")
+    @Expose
     private String releaseDate;
-    private List<Integer> genreIds = new ArrayList<Integer>();
+    @SerializedName("genre_ids")
+    @Expose
+    private List<Integer> genreIds = new ArrayList<>();
+    @SerializedName("id")
+    @Expose
     private Integer id;
+    @SerializedName("original_title")
+    @Expose
     private String originalTitle;
+    @SerializedName("original_language")
+    @Expose
     private String originalLanguage;
+    @SerializedName("title")
+    @Expose
     private String title;
+    @SerializedName("backdrop_path")
+    @Expose
     private String backdropPath;
+    @SerializedName("popularity")
+    @Expose
     private Double popularity;
+    @SerializedName("vote_count")
+    @Expose
     private Integer voteCount;
+    @SerializedName("video")
+    @Expose
     private Boolean video;
+    @SerializedName("vote_average")
+    @Expose
     private Double voteAverage;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    /**
-     * No args constructor for use in serialization
-     */
     public Result() {
     }
 
-    /**
-     * @param id
-     * @param genreIds
-     * @param title
-     * @param releaseDate
-     * @param overview
-     * @param posterPath
-     * @param originalTitle
-     * @param voteAverage
-     * @param originalLanguage
-     * @param adult
-     * @param backdropPath
-     * @param voteCount
-     * @param video
-     * @param popularity
-     */
-    public Result(String posterPath, Boolean adult, String overview, String releaseDate, List<Integer> genreIds, Integer id, String originalTitle, String originalLanguage, String title, String backdropPath, Double popularity, Integer voteCount, Boolean video, Double voteAverage) {
-        this.posterPath = posterPath;
-        this.adult = adult;
-        this.overview = overview;
-        this.releaseDate = releaseDate;
-        this.genreIds = genreIds;
-        this.id = id;
-        this.originalTitle = originalTitle;
-        this.originalLanguage = originalLanguage;
-        this.title = title;
-        this.backdropPath = backdropPath;
-        this.popularity = popularity;
-        this.voteCount = voteCount;
-        this.video = video;
-        this.voteAverage = voteAverage;
+    private Result(Parcel in) {
+        this.posterPath = in.readString();
+        this.adult = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.overview = in.readString();
+        this.releaseDate = in.readString();
+        this.genreIds = new ArrayList<>();
+        in.readList(this.genreIds, List.class.getClassLoader());
+        this.id = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.originalTitle = in.readString();
+        this.originalLanguage = in.readString();
+        this.title = in.readString();
+        this.backdropPath = in.readString();
+        this.popularity = (Double) in.readValue(Double.class.getClassLoader());
+        this.voteCount = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.video = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.voteAverage = (Double) in.readValue(Double.class.getClassLoader());
     }
 
     /**
-     * @return The posterPath
+     *
+     * @return
+     * The posterPath
      */
     public String getPosterPath() {
         return posterPath;
     }
 
     /**
-     * @param posterPath The poster_path
+     *
+     * @param posterPath
+     * The poster_path
      */
     public void setPosterPath(String posterPath) {
         this.posterPath = posterPath;
     }
 
-    public Result withPosterPath(String posterPath) {
-        this.posterPath = posterPath;
-        return this;
-    }
-
     /**
-     * @return The adult
+     *
+     * @return
+     * The adult
      */
     public Boolean getAdult() {
         return adult;
     }
 
     /**
-     * @param adult The adult
+     *
+     * @param adult
+     * The adult
      */
     public void setAdult(Boolean adult) {
         this.adult = adult;
     }
 
-    public Result withAdult(Boolean adult) {
-        this.adult = adult;
-        return this;
-    }
-
     /**
-     * @return The overview
+     *
+     * @return
+     * The overview
      */
     public String getOverview() {
         return overview;
     }
 
     /**
-     * @param overview The overview
+     *
+     * @param overview
+     * The overview
      */
     public void setOverview(String overview) {
         this.overview = overview;
     }
 
-    public Result withOverview(String overview) {
-        this.overview = overview;
-        return this;
-    }
-
     /**
-     * @return The releaseDate
+     *
+     * @return
+     * The releaseDate
      */
     public String getReleaseDate() {
         return releaseDate;
     }
 
     /**
-     * @param releaseDate The release_date
+     *
+     * @param releaseDate
+     * The release_date
      */
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
 
-    public Result withReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
-        return this;
-    }
-
     /**
-     * @return The genreIds
+     *
+     * @return
+     * The genreIds
      */
     public List<Integer> getGenreIds() {
         return genreIds;
     }
 
     /**
-     * @param genreIds The genre_ids
+     *
+     * @param genreIds
+     * The genre_ids
      */
     public void setGenreIds(List<Integer> genreIds) {
         this.genreIds = genreIds;
     }
 
-    public Result withGenreIds(List<Integer> genreIds) {
-        this.genreIds = genreIds;
-        return this;
-    }
-
     /**
-     * @return The id
+     *
+     * @return
+     * The id
      */
     public Integer getId() {
         return id;
     }
 
     /**
-     * @param id The id
+     *
+     * @param id
+     * The id
      */
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public Result withId(Integer id) {
-        this.id = id;
-        return this;
-    }
-
     /**
-     * @return The originalTitle
+     *
+     * @return
+     * The originalTitle
      */
     public String getOriginalTitle() {
         return originalTitle;
     }
 
     /**
-     * @param originalTitle The original_title
+     *
+     * @param originalTitle
+     * The original_title
      */
     public void setOriginalTitle(String originalTitle) {
         this.originalTitle = originalTitle;
     }
 
-    public Result withOriginalTitle(String originalTitle) {
-        this.originalTitle = originalTitle;
-        return this;
-    }
-
     /**
-     * @return The originalLanguage
+     *
+     * @return
+     * The originalLanguage
      */
     public String getOriginalLanguage() {
         return originalLanguage;
     }
 
     /**
-     * @param originalLanguage The original_language
+     *
+     * @param originalLanguage
+     * The original_language
      */
     public void setOriginalLanguage(String originalLanguage) {
         this.originalLanguage = originalLanguage;
     }
 
-    public Result withOriginalLanguage(String originalLanguage) {
-        this.originalLanguage = originalLanguage;
-        return this;
-    }
-
     /**
-     * @return The title
+     *
+     * @return
+     * The title
      */
     public String getTitle() {
         return title;
     }
 
     /**
-     * @param title The title
+     *
+     * @param title
+     * The title
      */
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public Result withTitle(String title) {
-        this.title = title;
-        return this;
-    }
-
     /**
-     * @return The backdropPath
+     *
+     * @return
+     * The backdropPath
      */
     public String getBackdropPath() {
         return backdropPath;
     }
 
     /**
-     * @param backdropPath The backdrop_path
+     *
+     * @param backdropPath
+     * The backdrop_path
      */
     public void setBackdropPath(String backdropPath) {
         this.backdropPath = backdropPath;
     }
 
-    public Result withBackdropPath(String backdropPath) {
-        this.backdropPath = backdropPath;
-        return this;
-    }
-
     /**
-     * @return The popularity
+     *
+     * @return
+     * The popularity
      */
     public Double getPopularity() {
         return popularity;
     }
 
     /**
-     * @param popularity The popularity
+     *
+     * @param popularity
+     * The popularity
      */
     public void setPopularity(Double popularity) {
         this.popularity = popularity;
     }
 
-    public Result withPopularity(Double popularity) {
-        this.popularity = popularity;
-        return this;
-    }
-
     /**
-     * @return The voteCount
+     *
+     * @return
+     * The voteCount
      */
     public Integer getVoteCount() {
         return voteCount;
     }
 
     /**
-     * @param voteCount The vote_count
+     *
+     * @param voteCount
+     * The vote_count
      */
     public void setVoteCount(Integer voteCount) {
         this.voteCount = voteCount;
     }
 
-    public Result withVoteCount(Integer voteCount) {
-        this.voteCount = voteCount;
-        return this;
-    }
-
     /**
-     * @return The video
+     *
+     * @return
+     * The video
      */
     public Boolean getVideo() {
         return video;
     }
 
     /**
-     * @param video The video
+     *
+     * @param video
+     * The video
      */
     public void setVideo(Boolean video) {
         this.video = video;
     }
 
-    public Result withVideo(Boolean video) {
-        this.video = video;
-        return this;
-    }
-
     /**
-     * @return The voteAverage
+     *
+     * @return
+     * The voteAverage
      */
     public Double getVoteAverage() {
         return voteAverage;
     }
 
     /**
-     * @param voteAverage The vote_average
+     *
+     * @param voteAverage
+     * The vote_average
      */
     public void setVoteAverage(Double voteAverage) {
         this.voteAverage = voteAverage;
     }
 
-    public Result withVoteAverage(Double voteAverage) {
-        this.voteAverage = voteAverage;
-        return this;
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.posterPath);
+        dest.writeValue(this.adult);
+        dest.writeString(this.overview);
+        dest.writeString(this.releaseDate);
+        dest.writeList(this.genreIds);
+        dest.writeValue(this.id);
+        dest.writeString(this.originalTitle);
+        dest.writeString(this.originalLanguage);
+        dest.writeString(this.title);
+        dest.writeString(this.backdropPath);
+        dest.writeValue(this.popularity);
+        dest.writeValue(this.voteCount);
+        dest.writeValue(this.video);
+        dest.writeValue(this.voteAverage);
     }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
-
-    public Result withAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-        return this;
-    }
-
 }

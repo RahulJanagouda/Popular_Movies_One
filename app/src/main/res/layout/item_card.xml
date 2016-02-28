@@ -1,27 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:padding="15dp">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/card_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        android:src="@drawable/placeholder" />
-
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop" />
     <TextView
-        android:id="@+id/card_title"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/card_title_height"
-        android:layout_alignBottom="@+id/card_image"
-        android:layout_centerHorizontal="true"
-        android:gravity="center|center_vertical"
-        android:text="Movie Name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
-
+        android:id="@+id/movieName"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:background="@color/blackOverlay"
+        android:gravity="center|bottom"
+        android:text="@string/na"
+        android:textColor="@color/white" />
 </RelativeLayout>

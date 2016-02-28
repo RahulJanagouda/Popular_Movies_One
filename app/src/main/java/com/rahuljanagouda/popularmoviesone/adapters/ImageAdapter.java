@@ -6,66 +6,98 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.rahuljanagouda.popularmoviesone.DetailsActivity;
+import com.bumptech.glide.Glide;
 import com.rahuljanagouda.popularmoviesone.R;
+import com.rahuljanagouda.popularmoviesone.pojo.MovieApiResponse;
+import com.rahuljanagouda.popularmoviesone.pojo.Result;
+import com.rahuljanagouda.popularmoviesone.ui.DetailsActivity;
+import com.rahuljanagouda.popularmoviesone.utils.Network;
 
 
 /**
  * Created by rahuljanagouda on 14/02/16.
  */
 public class ImageAdapter extends BaseAdapter {
-    private Context mContext;
-    // references to our images
-    private Integer[] mThumbIds = {
-            R.drawable.placeholder, R.drawable.placeholder,
-            R.drawable.placeholder, R.drawable.placeholder,
-            R.drawable.placeholder, R.drawable.placeholder,
-            R.drawable.placeholder, R.drawable.placeholder,
-            R.drawable.placeholder, R.drawable.placeholder,
-            R.drawable.placeholder, R.drawable.placeholder,
-            R.drawable.placeholder, R.drawable.placeholder,
-            R.drawable.placeholder, R.drawable.placeholder,
-            R.drawable.placeholder, R.drawable.placeholder,
-            R.drawable.placeholder, R.drawable.placeholder,
-            R.drawable.placeholder, R.drawable.placeholder
-    };
+    private final Context mContext;
+    private final MovieApiResponse pageResponse;
 
-    public ImageAdapter(Context c) {
-        mContext = c;
+    public ImageAdapter(Context mContext, MovieApiResponse response) {
+        this.mContext = mContext;
+        pageResponse = response;
     }
 
     public int getCount() {
-        return mThumbIds.length;
+        return pageResponse.getResults().size();
     }
 
     public Object getItem(int position) {
-        return null;
+        return pageResponse.getResults().get(position);
     }
 
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     // create a new ImageView for each item referenced by the Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view;
-        if (convertView == null) {
+
+        View vi = convertView;
+        ViewHolder holder;
+
+        if (vi == null) {
             LayoutInflater layoutInflater = (LayoutInflater) mContext.getSystemService
                     (Context.LAYOUT_INFLATER_SERVICE);
-            view = layoutInflater.inflate(R.layout.item_card, parent, false);
+            vi = layoutInflater.inflate(R.layout.item_card, parent, false);
+            holder = new ViewHolder();
 
+            holder.movieThumb = (ImageView) vi.findViewById(R.id.card_image);
+            holder.movieName = (TextView) vi.findViewById(R.id.movieName);
+
+            vi.setTag(holder);
         } else {
-            view = convertView;
+            holder = (ViewHolder) vi.getTag();
         }
-        view.setOnClickListener(new View.OnClickListener() {
+
+        final Result movieResult = (Result) getItem(position);
+
+        holder.movieName.setText(movieResult.getTitle());
+        if (movieResult.getPosterPath() != null) {
+            Glide
+                    .with(mContext)
+                    .load(Network.TMDB_IMAGE_BASE_URL + movieResult.getPosterPath())
+                    .error(R.drawable.placeholder)
+                    .into(holder.movieThumb);
+        } else {
+            Glide
+                    .with(mContext)
+                    .load(R.drawable.placeholder)
+                    .into(holder.movieThumb);
+        }
+
+        vi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext, DetailsActivity.class));
+                Intent i = new Intent(mContext, DetailsActivity.class);
+                i.putExtra("movieResult", movieResult);
+                mContext.startActivity(i);
 
             }
         });
 
-        return view;
+        return vi;
+    }
+
+    @Override
+    public boolean hasStableIds() {
+        return true;
+    }
+
+    static class ViewHolder {
+
+        ImageView movieThumb;
+        TextView movieName;
     }
 }
