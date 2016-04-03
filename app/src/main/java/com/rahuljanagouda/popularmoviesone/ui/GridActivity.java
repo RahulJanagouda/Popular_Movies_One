@@ -36,7 +36,7 @@ public class GridActivity extends AppCompatActivity {
 
 
         if (savedInstanceState == null || !savedInstanceState.containsKey("MovieApiResponse")) {
-            makeNetworkRequest(1);
+            checkInternetAndRequestData();
         } else {
             movieApiResponse = savedInstanceState.getParcelable("MovieApiResponse");
             setupGridView(moviesGrid, movieApiResponse);
@@ -110,5 +110,30 @@ public class GridActivity extends AppCompatActivity {
     public void onSaveInstanceState(Bundle outState) {
         outState.putParcelable("MovieApiResponse", movieApiResponse);
         super.onSaveInstanceState(outState);
+    }
+
+    private void checkInternetAndRequestData(){
+        if (Network.isOnline(mContext)){
+            makeNetworkRequest(1);
+        }else {
+            AlertDialog.Builder builder =
+                    new AlertDialog.Builder(this);
+            builder.setTitle("No Internet Connection");
+            builder.setMessage("Oops, No internet connection found. Please connect and retry again.");
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            builder.setNeutralButton("Retry", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    checkInternetAndRequestData();
+                }
+            });
+            builder.setCancelable(false);
+            builder.show();
+        }
     }
 }

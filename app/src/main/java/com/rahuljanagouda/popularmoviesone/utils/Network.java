@@ -1,5 +1,9 @@
 package com.rahuljanagouda.popularmoviesone.utils;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 /**
  * Created by rahuljanagouda on 14/02/16.
  */
@@ -21,5 +25,11 @@ public class Network {
     public static final String URL_TMDB_DISCOVER_MOVIES_HIGHEST_RATED_API = URL_TMDB_DISCOVER_MOVIES_HIGHEST_RATED + "?" +
             "&api_key=" + TMDB_API_KEY;
 
+    public static boolean isOnline(Context mContext) {
+        ConnectivityManager cm =
+                (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
+    }
 
 }
