@@ -7,6 +7,10 @@
     <string name="release_date">Release Date</string>
     <string name="sample_release">Dec 31, 2017</string>
     <string name="rating">Rating</string>
+    <string name="videos">Videos</string>
+    <string name="reviews">Reviews</string>
+    <string name="trailer_1">Trailer 1</string>
     <string name="_7_10">7/10</string>
+    <string name="dummy_review">Dummy Review</string>
     <string name="na">NA!</string>
 </resources>

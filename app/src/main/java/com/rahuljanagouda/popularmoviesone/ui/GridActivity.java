@@ -6,23 +6,25 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.GridView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.rahuljanagouda.popularmoviesone.AppController;
 import com.rahuljanagouda.popularmoviesone.R;
-import com.rahuljanagouda.popularmoviesone.adapters.ImageAdapter;
+import com.rahuljanagouda.popularmoviesone.adapters.GridSpacingItemDecoration;
+import com.rahuljanagouda.popularmoviesone.adapters.RecyclerAdapter;
 import com.rahuljanagouda.popularmoviesone.helper.GsonRequest;
-import com.rahuljanagouda.popularmoviesone.pojo.MovieApiResponse;
+import com.rahuljanagouda.popularmoviesone.pojo.movie.MovieApiResponse;
 import com.rahuljanagouda.popularmoviesone.utils.Network;
 
 public class GridActivity extends AppCompatActivity {
     private Context mContext;
-    private GridView moviesGrid;
+    private RecyclerView moviesGrid;
     private MovieApiResponse movieApiResponse = null;
 
     @Override
@@ -32,7 +34,7 @@ public class GridActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mContext = this;
-        moviesGrid = (GridView) findViewById(R.id.moview_grid_layout);
+        moviesGrid = (RecyclerView) findViewById(R.id.grid_recycler);
 
 
         if (savedInstanceState == null || !savedInstanceState.containsKey("MovieApiResponse")) {
@@ -101,8 +103,11 @@ public class GridActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setupGridView(@NonNull GridView moviesGrid, MovieApiResponse response) {
-        moviesGrid.setAdapter(new ImageAdapter(mContext, response));
+    private void setupGridView(@NonNull RecyclerView moviesGrid, MovieApiResponse response) {
+        moviesGrid.setAdapter(new RecyclerAdapter(mContext, response));
+        moviesGrid.setHasFixedSize(true);
+        moviesGrid.addItemDecoration(new GridSpacingItemDecoration(2,10,true));
+        moviesGrid.setLayoutManager(new GridLayoutManager(mContext,2));
 
     }
 

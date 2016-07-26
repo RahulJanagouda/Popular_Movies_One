@@ -1,4 +1,4 @@
-package com.rahuljanagouda.popularmoviesone.pojo;
+package com.rahuljanagouda.popularmoviesone.pojo.movie;
 
 /**
  * Created by rahuljanagouda on 14/02/16.

@@ -1,4 +1,4 @@
-package com.rahuljanagouda.popularmoviesone.pojo;
+package com.rahuljanagouda.popularmoviesone.pojo.movie;
 
 
 import android.os.Parcel;

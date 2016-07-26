@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.rahuljanagouda.popularmoviesone.R;
-import com.rahuljanagouda.popularmoviesone.pojo.MovieApiResponse;
-import com.rahuljanagouda.popularmoviesone.pojo.Result;
+import com.rahuljanagouda.popularmoviesone.pojo.movie.MovieApiResponse;
+import com.rahuljanagouda.popularmoviesone.pojo.movie.Result;
 import com.rahuljanagouda.popularmoviesone.ui.DetailsActivity;
 import com.rahuljanagouda.popularmoviesone.utils.Network;
 

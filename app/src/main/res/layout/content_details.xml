@@ -60,6 +60,36 @@
             android:text="@string/_7_10"
             android:textSize="20sp" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:text="@string/videos"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/movieVideos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="@string/trailer_1"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:text="@string/reviews"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/movieReviews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="@string/dummy_review"
+            android:textSize="20sp" />
+
 
     </LinearLayout>
 
